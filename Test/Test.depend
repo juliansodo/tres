@@ -1,0 +1,40 @@
+# depslib dependency file v1.0
+1570544708 source:d:\test\actor.c
+	"Actor.h"
+
+1570543727 d:\test\actor.h
+	"Sistema.h"
+
+1570541993 d:\test\sistema.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<ctype.h>
+
+1570538359 source:d:\test\elenco.c
+	"Elenco.h"
+
+1570538701 d:\test\elenco.h
+
+1570538501 source:d:\test\genero.c
+	"Genero.h"
+
+1570538738 d:\test\genero.h
+
+1570543267 source:d:\test\main.c
+	"Sistema.h"
+	"Actor.h"
+	"Elenco.h"
+	"Genero.h"
+	"Pelicula.h"
+
+1570538709 d:\test\pelicula.h
+
+1570538398 source:d:\test\menu.c
+
+1570538343 source:d:\test\pelicula.c
+	"Pelicula.h"
+
+1570540740 source:d:\test\sistema.c
+	"Sistema.h"
+
