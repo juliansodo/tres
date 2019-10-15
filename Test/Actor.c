@@ -4,11 +4,44 @@
 void Actor_inicializarActores(Actor listadoActores[], int MAX)
 {
     int i;
+    int codigos[4] = {0,1,2,3};
+    char nombres[4][51] = {"LEONARDO", "JOSEPH", "LEIGH", "LEONARDO"};
+    char apellidos[4][51] = {"DICAPRIO", "GORDON", "WHANNELL", "SBARAGLIA"};
+    char sexos[4] = {'M','M','M', 'M'};
     for(i = 0; i<MAX; i++)
     {
         listadoActores[i].isEmpty = 1;
     }
+
+    for(i = 0; i < 4 ; i++)
+    {
+        listadoActores[i].codigo = codigos[i];
+        strcpy(listadoActores[i].nombre , nombres[i]);
+        strcpy(listadoActores[i].apellido ,apellidos[i]);
+        listadoActores[i].sexo = sexos[i];
+        listadoActores[i].isEmpty = 0;
+    }
 }
+
+int Actor_buscarIndicePorID(Actor listadoActores[], int MAX, int indice)
+{
+    int i;
+    int retorno = -1;
+    for(i = 0; i<MAX; i++)
+    {
+        if(listadoActores[i].isEmpty == 0)
+        {
+            if(indice == listadoActores[i].codigo)
+            {
+                retorno = i;
+                break;
+            }
+        }
+
+    }
+    return retorno;
+}
+
 int Actor_altaActor(Actor listadoActores[], int MAX)
 {
     int posicionVacia = Actor_encontrarPosicionVacia(listadoActores, MAX);
@@ -16,37 +49,38 @@ int Actor_altaActor(Actor listadoActores[], int MAX)
     char nombre[51];
     if(posicionVacia != -1)
     {
+        printf("%d \n", posicionVacia);
         int codigo = posicionVacia;
         char nombre[51];
         char apellido[51];
         char sexo;
-
+        fflush(stdin);
         do
         {
-            printf("\nIngrese el nombre del actor(Maximo 51 caracteres)");
+            printf("\nIngrese el nombre del actor(Maximo 51 caracteres): ");
             gets(nombre);
         }while(strlen(nombre) > 51);
 
-
+        fflush(stdin);
         do
         {
-            printf("\nIngrese el apellido del actor(Maximo 51 caracteres)");
+            printf("\nIngrese el apellido del actor(Maximo 51 caracteres): ");
             gets(apellido);
         }while(strlen(apellido) > 51);
 
         do
         {
-            printf("\nIngrese el sexo del actor(valido solo M(masculino) o F(femenino) ");
+            printf("\nIngrese el sexo del actor(valido solo M(masculino) o F(femenino): ");
             fflush(stdin);
-            scanf("%c", sexo);
+            scanf("%c", &sexo);
         }while(toupper(sexo) != 'M' && toupper(sexo) !='F');
-
-        strcpy(listadoActores[posicionVacia].nombre , nombre);
-        strcpy(listadoActores[posicionVacia].apellido , apellido);
-        listadoActores[posicionVacia].sexo = sexo;
+        strcpy(listadoActores[posicionVacia].nombre , toupper(nombre));
+        strcpy(listadoActores[posicionVacia].apellido , toupper(apellido));
+        listadoActores[posicionVacia].sexo = toupper(sexo);
         listadoActores[posicionVacia].isEmpty = 0;
         listadoActores[posicionVacia].codigo = codigo;
-
+        printf("\nSe dio de alta un nuevo actor. La información es: \n");
+        Actor_listarActor(listadoActores,posicionVacia);
     }
 }
 int Actor_bajarActor(Actor listadoActores[], int MAX)
@@ -54,9 +88,9 @@ int Actor_bajarActor(Actor listadoActores[], int MAX)
     int indice;
     int encontroPosicion;
     int retorno;
-    printf("Ingrese el ID del actor que desea bajar");
-    scanf("%d", indice);
-    encontroPosicion = indice;
+    printf("Ingrese el ID del actor que desea bajar: ");
+    scanf("%d", &indice);
+    encontroPosicion = Actor_buscarIndicePorID(listadoActores,MAX,indice);
     if(encontroPosicion != -1)
     {
         listadoActores[encontroPosicion].isEmpty = 1;
@@ -76,9 +110,9 @@ int Actor_modificarActor(Actor listadoActores[], int MAX)
     int encontroPosicion;
     int retorno = -1;
     int opcionEdicion;
-    printf("Ingrese el ID del actor que desea modificar");
-    scanf("%d", indice);
-    encontroPosicion = indice;
+    printf("Ingrese el ID del actor que desea modificar: ");
+    scanf("%d", &indice);
+    encontroPosicion = Actor_buscarIndicePorID(listadoActores, MAX, indice);
     if(encontroPosicion != -1)
     {
         do
@@ -103,21 +137,25 @@ int Actor_modificarActor(Actor listadoActores[], int MAX)
 void Actor_listarActores(Actor listadoActores[], int MAX)
 {
     int i;
+    Actor * auxListadoActores;
+    auxListadoActores = Actor_ordenarXNombreYApellido(listadoActores, MAX);
     for(i=0;i<MAX;i++)
     {
-        if(listadoActores[i].isEmpty == 0)
+        if(auxListadoActores[i].isEmpty == 0)
         {
-            Actor_listarActor(listadoActores, i);
+            Actor_listarActor(auxListadoActores,i);
         }
     }
+
 }
 
 void Actor_listarActor(Actor listadoActores[], int indice)
 {
-    printf("\n\t\t\t-------ID:%d--------", listadoActores[indice].codigo);
+    printf("\n-------ID:%d--------", listadoActores[indice].codigo);
     printf("\nNombre: %s", listadoActores[indice].nombre);
     printf("\nApellido: %s", listadoActores[indice].apellido);
     printf("\nSexo: %c", listadoActores[indice].sexo);
+    printf("\n-------------------\n");
 }
 int Actor_encontrarPosicionVacia(Actor listadoActores[], int MAX)
 {
@@ -128,6 +166,7 @@ int Actor_encontrarPosicionVacia(Actor listadoActores[], int MAX)
         if(listadoActores[i].isEmpty == 1)
         {
             retorno = i;
+            break;
         }
     }
     return retorno;
@@ -136,18 +175,21 @@ int Actor_encontrarPosicionVacia(Actor listadoActores[], int MAX)
 
 void setNombre(Actor listadoActores[], int indice)
 {
+
     char nombre[51];
     printf("\nIngrese el nuevo nombre:");
+    fflush(stdin);
     gets(nombre);
-    strcpy(listadoActores[indice].nombre, nombre);
+    strcpy(listadoActores[indice].nombre, toupper(nombre));
 }
 
 void setApellido(Actor listadoActores[], int indice)
 {
     char apellido[51];
     printf("\nIngrese el nuevo nombre:");
+    fflush(stdin);
     gets(apellido);
-    strcpy(listadoActores[indice].apellido, apellido);
+    strcpy(listadoActores[indice].apellido, toupper(apellido));
 }
 
 void setSexo(Actor listadoActores[], int indice)
@@ -155,7 +197,39 @@ void setSexo(Actor listadoActores[], int indice)
     char sexo;
     printf("\nIngrese el nuevo nombre:");
     fflush(stdin);
-    scanf("%c", sexo);
-    listadoActores[indice].sexo = sexo;
+    scanf("%c", &sexo);
+    listadoActores[indice].sexo = toupper(sexo);
+}
+
+Actor* Actor_ordenarXNombreYApellido(Actor listadoActores[], int MAX)
+{
+    int i,j;
+    Actor* auxListadoActores = listadoActores;
+    Actor auxActor;
+    for(i = 0; i < MAX; i++)
+    {
+        for(j = i+1; j < MAX+1; j++)
+        {
+            if(strcmp(listadoActores[i].nombre, listadoActores[j].nombre) >0)
+            {
+                auxActor = listadoActores[i];
+                auxListadoActores[i] = listadoActores[j];
+                auxListadoActores[j] = auxActor;
+            }
+            else if(strcmp(listadoActores[i].nombre, listadoActores[j].nombre) == 0)
+            {
+                if(strcmp(listadoActores[i].apellido, listadoActores[j].apellido) >0)
+                    {
+                        auxActor = listadoActores[i];
+                        auxListadoActores[i] = listadoActores[j];
+                        auxListadoActores[j] = auxActor;
+                    }
+            }
+
+        }
+    }
+
+    return auxListadoActores;
+
 }
 

@@ -38,3 +38,80 @@
 1570540740 source:d:\test\sistema.c
 	"Sistema.h"
 
+1570760401 source:c:\users\jajas\desktop\facultad\tres\test\actor.c
+	"Actor.h"
+
+1570762279 c:\users\jajas\desktop\facultad\tres\test\actor.h
+	"Sistema.h"
+
+1570753004 c:\users\jajas\desktop\facultad\tres\test\sistema.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<ctype.h>
+
+1570753004 source:c:\users\jajas\desktop\facultad\tres\test\elenco.c
+	"Elenco.h"
+
+1570753004 c:\users\jajas\desktop\facultad\tres\test\elenco.h
+
+1570753004 source:c:\users\jajas\desktop\facultad\tres\test\genero.c
+	"Genero.h"
+
+1570753004 c:\users\jajas\desktop\facultad\tres\test\genero.h
+
+1570759717 source:c:\users\jajas\desktop\facultad\tres\test\main.c
+	"Sistema.h"
+	"Actor.h"
+	"Elenco.h"
+	"Genero.h"
+	"Pelicula.h"
+
+1570753004 c:\users\jajas\desktop\facultad\tres\test\pelicula.h
+
+1570753004 source:c:\users\jajas\desktop\facultad\tres\test\menu.c
+
+1570753004 source:c:\users\jajas\desktop\facultad\tres\test\pelicula.c
+	"Pelicula.h"
+
+1570753004 source:c:\users\jajas\desktop\facultad\tres\test\sistema.c
+	"Sistema.h"
+
+1571117762 source:c:\users\jajas\desktop\facultad\parcial\test\elenco.c
+	"Elenco.h"
+
+1571118406 c:\users\jajas\desktop\facultad\parcial\test\elenco.h
+	"Actor.h"
+
+1571108635 source:c:\users\jajas\desktop\facultad\parcial\test\genero.c
+	"Genero.h"
+
+1571090009 c:\users\jajas\desktop\facultad\parcial\test\genero.h
+	"Sistema.h"
+
+1571119285 source:c:\users\jajas\desktop\facultad\parcial\test\main.c
+	"Elenco.h"
+
+1571088938 c:\users\jajas\desktop\facultad\parcial\test\sistema.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<ctype.h>
+
+1571090068 c:\users\jajas\desktop\facultad\parcial\test\actor.h
+	"Pelicula.h"
+
+1571118501 c:\users\jajas\desktop\facultad\parcial\test\pelicula.h
+	"Genero.h"
+
+1570753004 source:c:\users\jajas\desktop\facultad\parcial\test\menu.c
+
+1571116653 source:c:\users\jajas\desktop\facultad\parcial\test\pelicula.c
+	"Pelicula.h"
+
+1570753004 source:c:\users\jajas\desktop\facultad\parcial\test\sistema.c
+	"Sistema.h"
+
+1571118966 source:c:\users\jajas\desktop\facultad\parcial\test\actor.c
+	"Actor.h"
+

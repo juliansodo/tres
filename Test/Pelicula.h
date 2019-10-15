@@ -1,5 +1,6 @@
-
+#include "Genero.h"
 #define MAX_PELICULAS 10
+
 typedef struct
 {
     int codigo;
@@ -9,3 +10,6 @@ typedef struct
 }Pelicula;
 
 void hardcodearPelicula(Pelicula*, int);
+void listarPeliculas(Pelicula[], int, Genero[], int);
+void listarPeliculaXId(Pelicula[], int , Genero [], int , int );
+int Pelicula_buscarIndicePorID(Pelicula*, int , int );

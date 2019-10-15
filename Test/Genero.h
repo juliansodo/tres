@@ -1,4 +1,4 @@
-
+#include "Sistema.h"
 #define MAX_GENERO 4
 
 typedef struct

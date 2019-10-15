@@ -1,25 +1,24 @@
-#include "Sistema.h"
-#include "Actor.h"
 #include "Elenco.h"
-#include "Genero.h"
-#include "Pelicula.h"
-
 
 void gestionarActores(Actor*, int );
-void gestionarElencos(Elenco*, int );
+void gestionarElencos(Elenco*, int, Pelicula*, int, Actor*, int, Genero*, int);
 int main()
 {
     Pelicula ListadoPeliculas[MAX_PELICULAS];
     Genero ListadoGeneros[MAX_GENERO];
     Actor ListadoActores[MAX_ACTOR];
     Elenco ListadoElencos[MAX_ELENCO];
+    hardcodearPelicula(ListadoPeliculas, MAX_PELICULAS);
+    hardcodearGenero(ListadoGeneros, MAX_GENERO);
+    Elenco_inicializarElencos(ListadoElencos, MAX_ELENCO);
+    Actor_inicializarActores(ListadoActores, MAX_ACTOR);
     int opcionGestion;
     int opcionMenu;
 
     do
     {
         printf("\t\t\n------Menu------");
-        printf("\n1-Gestionar Actores\n2-GestionarElencos\n3-Salir");
+        printf("\n1-Gestionar Actores\n2-GestionarElencos\n3-Salir\nElegir: ");
         scanf("%d", &opcionGestion);
         switch(opcionGestion)
         {
@@ -27,7 +26,7 @@ int main()
             gestionarActores(ListadoActores, MAX_ACTOR);
             break;
         case 2:
-            gestionarElencos(ListadoElencos, MAX_ELENCO);
+            gestionarElencos(ListadoElencos, MAX_ELENCO, ListadoPeliculas, MAX_PELICULAS, ListadoActores, MAX_ACTOR, ListadoGeneros, MAX_GENERO);
             break;
         }
 
@@ -37,38 +36,69 @@ int main()
     return 0;
 }
 
-
-
-void gestionarElencos(Elenco listadoElencos[], int MAX )
+void gestionarElencos(Elenco listadoElencos[], int MAX_Elencos, Pelicula listadoPeliculas[], int MAX_Peliculas, Actor listadoActores[], int MAX_Actores, Genero listadoGeneros[], int MAX_Generos )
 {
-    printf("\n1-Generar un elenco\n2-Listar Elencos\n3-Baja de actor\n4-ListarActores\n5-Salir");
-
+    char opcionMenu;
+    int auxiliar;
+    do
+    {
+        printf("\nA)Generar un elenco\nB)Listar elencos\nC)Salir\nElegir: ");
+        fflush(stdin);
+        scanf("%c", &opcionMenu);
+        switch(tolower(opcionMenu))
+        {
+        case 'a':
+            auxiliar = Elenco_altaElenco(listadoElencos, MAX_Elencos, listadoActores, MAX_Actores, listadoPeliculas , MAX_Peliculas, listadoGeneros, MAX_Generos);
+            if(auxiliar == -1)
+            {
+                printf("\nNo se puede crear un actor porque no hay espacio.");
+            }
+            break;
+        case 'b':
+            Elenco_listarElencos(listadoElencos, MAX_Elencos, listadoPeliculas, MAX_Peliculas, listadoActores, MAX_Actores, listadoGeneros, MAX_Generos);
+            break;
+        default: continue;
+        }
+        printf("\n");
+        system("pause");
+        system("cls");
+    }
+    while(opcionMenu !='e');
 }
 
 void gestionarActores(Actor listadoActores[], int MAX)
 {
-    int opcionMenu;
+    char opcionMenu;
     int auxiliar;
+
     do
     {
-        printf("\n1-Ingresar un actor\n2-Modificar un actor\n3-Baja de actor\n4-ListarActores\n5-Salir");
-        scanf("%d", opcionMenu);
-
-        switch(opcionMenu)
+        printf("\nA)Ingresar un actor\nB)Modificar un actor\nC)Baja de actor\nD)ListarActores\nE)Salir\nElegir: ");
+        fflush(stdin);
+        scanf("%c", &opcionMenu);
+        switch(tolower(opcionMenu))
         {
-        case 1:
-            Actor_altaActor(listadoActores, MAX);
+        case 'a':
+            auxiliar = Actor_altaActor(listadoActores, MAX);
+            if(auxiliar == -1)
+            {
+                printf("\nNo se puede crear un actor porque no hay espacio.");
+            }
             break;
-        case 2:
+        case 'b':
             auxiliar = Actor_modificarActor(listadoActores, MAX);
             break;
-        case 3:
+        case 'c':
             auxiliar = Actor_bajarActor(listadoActores, MAX);
             break;
-        case 4:
+        case 'd':
             Actor_listarActores(listadoActores, MAX);
             break;
+        default: continue;
         }
+        printf("\n");
+        system("pause");
+        system("cls");
     }
-    while(opcionMenu !=5);
+    while(opcionMenu !='e');
 }

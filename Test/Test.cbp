@@ -31,6 +31,26 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
+		<Unit filename="Actor.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Actor.h" />
+		<Unit filename="Elenco.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Elenco.h" />
+		<Unit filename="Genero.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Genero.h" />
+		<Unit filename="Pelicula.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Pelicula.h" />
+		<Unit filename="Sistema.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Sistema.h" />
 		<Unit filename="main.c">
 			<Option compilerVar="CC" />
 		</Unit>
