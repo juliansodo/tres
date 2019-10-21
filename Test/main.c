@@ -42,7 +42,7 @@ void gestionarElencos(Elenco listadoElencos[], int MAX_Elencos, Pelicula listado
     int auxiliar;
     do
     {
-        printf("\nA)Generar un elenco\nB)Listar elencos\nC)Salir\nD)Listar Elencos\nElegir: ");
+        printf("\nA)Generar un elenco\nB)Listar elencos\nC)Salir\nElegir: ");
         fflush(stdin);
         scanf("%c", &opcionMenu);
         switch(tolower(opcionMenu))
@@ -56,10 +56,6 @@ void gestionarElencos(Elenco listadoElencos[], int MAX_Elencos, Pelicula listado
             break;
         case 'b':
             Elenco_listarElencos(listadoElencos, MAX_Elencos, listadoPeliculas, MAX_Peliculas, listadoActores, MAX_Actores, listadoGeneros, MAX_Generos);
-            break;
-        case 'd':
-                    listarElenco(listadoElencos, MAX_Elencos);
-
             break;
         default: continue;
         }

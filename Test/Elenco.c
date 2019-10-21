@@ -12,7 +12,7 @@ void Elenco_inicializarElencos(Elenco listadoElencos[], int MAX_Elencos)
     int peliculasId[4] =    {0,2,3,1};
     int actoresId[4] =      {0,2,1,3};
     float contratosValor[4] = {24.500, 32.111, 43.143, 54.221};
-    for(i = 0; i < 3; i++)
+    for(i = 0; i < 4; i++)
     {
         listadoElencos[i].idActor = peliculasId[i];
         listadoElencos[i].idPelicula = actoresId[i];
