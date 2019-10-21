@@ -5,14 +5,13 @@ void Actor_inicializarActores(Actor listadoActores[], int MAX)
 {
     int i;
     int codigos[4] = {0,1,2,3};
-    char nombres[4][51] = {"LEONARDO", "JOSEPH", "LEIGH", "LEONARDO"};
-    char apellidos[4][51] = {"DICAPRIO", "GORDON", "WHANNELL", "SBARAGLIA"};
+    char nombres[4][51] = {"Leonardo", "Joseph", "Leigh", "Leonardo"};
+    char apellidos[4][51] = {"Dicaprio", "Gordon", "Whannel", "Sbaraglia"};
     char sexos[4] = {'M','M','M', 'M'};
     for(i = 0; i<MAX; i++)
     {
         listadoActores[i].isEmpty = 1;
     }
-
     for(i = 0; i < 4 ; i++)
     {
         listadoActores[i].codigo = codigos[i];
@@ -138,7 +137,7 @@ void Actor_listarActores(Actor listadoActores[], int MAX)
 {
     int i;
     Actor * auxListadoActores;
-    auxListadoActores = Actor_ordenarXNombreYApellido(listadoActores, MAX);
+    auxListadoActores = listadoActores;
     for(i=0;i<MAX;i++)
     {
         if(auxListadoActores[i].isEmpty == 0)
@@ -149,8 +148,24 @@ void Actor_listarActores(Actor listadoActores[], int MAX)
 
 }
 
+void Actor_listarActoresOrdenados(Actor listadoActores[], int MAX)
+{
+    int i;
+    Actor * auxListadoActores;
+    auxListadoActores = listadoActores;
+    auxListadoActores = Actor_ordenarXNombreYApellido(auxListadoActores, MAX);
+    for(i=0;i<MAX;i++)
+    {
+        if(auxListadoActores[i].isEmpty == 0)
+        {
+            Actor_listarActor(auxListadoActores,i);
+        }
+    }
+
+}
 void Actor_listarActor(Actor listadoActores[], int indice)
 {
+
     printf("\n-------ID:%d--------", listadoActores[indice].codigo);
     printf("\nNombre: %s", listadoActores[indice].nombre);
     printf("\nApellido: %s", listadoActores[indice].apellido);
@@ -210,22 +225,25 @@ Actor* Actor_ordenarXNombreYApellido(Actor listadoActores[], int MAX)
     {
         for(j = i+1; j < MAX+1; j++)
         {
-            if(strcmp(listadoActores[i].nombre, listadoActores[j].nombre) >0)
+            if(auxListadoActores[i].isEmpty == 0 && auxListadoActores[j].isEmpty == 0)
             {
-                auxActor = listadoActores[i];
-                auxListadoActores[i] = listadoActores[j];
-                auxListadoActores[j] = auxActor;
-            }
-            else if(strcmp(listadoActores[i].nombre, listadoActores[j].nombre) == 0)
-            {
-                if(strcmp(listadoActores[i].apellido, listadoActores[j].apellido) >0)
+                if(strcmp(auxListadoActores[i].nombre, auxListadoActores[j].nombre) >0)
+                {
+                   // printf("%d ---- %d \n", auxListadoActores[i].codigo, auxListadoActores[j].codigo); //control de datos
+                    auxActor = auxListadoActores[i];
+                    auxListadoActores[i] = auxListadoActores[j];
+                    auxListadoActores[j] = auxActor;
+                }
+                else if(strcmp(auxListadoActores[i].nombre, auxListadoActores[j].nombre) == 0)
+                {
+                    if(strcmp(auxListadoActores[i].apellido, auxListadoActores[j].apellido) >0)
                     {
-                        auxActor = listadoActores[i];
-                        auxListadoActores[i] = listadoActores[j];
+                        auxActor = auxListadoActores[i];
+                        auxListadoActores[i] = auxListadoActores[j];
                         auxListadoActores[j] = auxActor;
                     }
+                }
             }
-
         }
     }
 

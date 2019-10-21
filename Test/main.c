@@ -42,7 +42,7 @@ void gestionarElencos(Elenco listadoElencos[], int MAX_Elencos, Pelicula listado
     int auxiliar;
     do
     {
-        printf("\nA)Generar un elenco\nB)Listar elencos\nC)Salir\nElegir: ");
+        printf("\nA)Generar un elenco\nB)Listar elencos\nC)Salir\nD)Listar Elencos\nElegir: ");
         fflush(stdin);
         scanf("%c", &opcionMenu);
         switch(tolower(opcionMenu))
@@ -57,25 +57,29 @@ void gestionarElencos(Elenco listadoElencos[], int MAX_Elencos, Pelicula listado
         case 'b':
             Elenco_listarElencos(listadoElencos, MAX_Elencos, listadoPeliculas, MAX_Peliculas, listadoActores, MAX_Actores, listadoGeneros, MAX_Generos);
             break;
+        case 'd':
+                    listarElenco(listadoElencos, MAX_Elencos);
+
+            break;
         default: continue;
         }
         printf("\n");
         system("pause");
         system("cls");
     }
-    while(opcionMenu !='e');
+    while(opcionMenu !='c');
 }
 
 void gestionarActores(Actor listadoActores[], int MAX)
 {
-    char opcionMenu;
     int auxiliar;
-
+    char opcionMenu;
     do
     {
         printf("\nA)Ingresar un actor\nB)Modificar un actor\nC)Baja de actor\nD)ListarActores\nE)Salir\nElegir: ");
         fflush(stdin);
-        scanf("%c", &opcionMenu);
+        //scanf("%c", &opcionMenu);
+        opcionMenu = getchar();
         switch(tolower(opcionMenu))
         {
         case 'a':
@@ -92,7 +96,7 @@ void gestionarActores(Actor listadoActores[], int MAX)
             auxiliar = Actor_bajarActor(listadoActores, MAX);
             break;
         case 'd':
-            Actor_listarActores(listadoActores, MAX);
+            Actor_listarActoresOrdenados(listadoActores, MAX);
             break;
         default: continue;
         }

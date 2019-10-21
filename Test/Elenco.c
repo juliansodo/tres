@@ -12,7 +12,7 @@ void Elenco_inicializarElencos(Elenco listadoElencos[], int MAX_Elencos)
     int peliculasId[4] =    {0,2,3,1};
     int actoresId[4] =      {0,2,1,3};
     float contratosValor[4] = {24.500, 32.111, 43.143, 54.221};
-    for(i = 0; i < 4; i++)
+    for(i = 0; i < 3; i++)
     {
         listadoElencos[i].idActor = peliculasId[i];
         listadoElencos[i].idPelicula = actoresId[i];
@@ -42,7 +42,7 @@ int Elenco_altaElenco(Elenco listadoElencos[], int MAX_Elencos, Actor listadoAct
                 printf("Ingrese el codigo del actor: ");
                 scanf("%d", &codigoActor);
                 corteControl = Actor_buscarIndicePorID(listadoActores, MAX_Actores, codigoActor);
-                printf("\n%d", codigoActor);
+                printf("\n%d", corteControl);
             }while(corteControl == -1);
             system("pause");
 
@@ -76,12 +76,12 @@ int Elenco_altaElenco(Elenco listadoElencos[], int MAX_Elencos, Actor listadoAct
     }
     return retorno;
 }
-void Elenco_listarElencos(Elenco listadoElencos[], int MAX_Elencos, Pelicula listadoPeliculas[], int MAX_Peliculas, Actor listadoActores[], int MAX_Actores, Genero listadoGeneros[], int MAX_Generos)
+/*void Elenco_listarElencos(Elenco listadoElencos[], int MAX_Elencos, Pelicula listadoPeliculas[], int MAX_Peliculas, Actor listadoActores[], int MAX_Actores, Genero listadoGeneros[], int MAX_Generos)
 {
     int iGenero, iPelicula, iActor, iElenco;
     for(iGenero = 0; iGenero < MAX_Generos; iGenero++)
     {
-       // printf("\n\t\t\t------------Peliculas de %s ------------\n", listadoGeneros[iGenero].descripcion);
+        printf("\n\t\t\t------------Peliculas de %s ------------\n", listadoGeneros[iGenero].descripcion);
         for(iPelicula = 0; iPelicula < MAX_Peliculas; iPelicula++)
         {
             if(listadoPeliculas[iPelicula].codigo!= -1 && listadoPeliculas[iPelicula].idGenero == listadoGeneros[iGenero].id)
@@ -98,7 +98,45 @@ void Elenco_listarElencos(Elenco listadoElencos[], int MAX_Elencos, Pelicula lis
             }
         }
     }
+}*/
+void Elenco_listarElencos(Elenco listadoElencos[], int MAX_Elencos, Pelicula listadoPeliculas[], int MAX_Peliculas, Actor listadoActores[], int MAX_Actores, Genero listadoGeneros[], int MAX_Generos)
+{
+    int i,j,k;
+    int corteControl = 0;
+    Actor * AuxListadoActores = listadoActores;
+    AuxListadoActores = Actor_ordenarXNombreYApellido(AuxListadoActores,MAX_Actores);
+    for(k = 0; k<MAX_Peliculas; k++)
+    {
+        if(listadoPeliculas[k].codigo == -1){break;}
+        printf("\n\n\t\t\t______%s______\n", listadoPeliculas[k].descripcion);
+        for(i = 0 ; i < MAX_Elencos; i++)
+        {
+            if(listadoElencos[i].idPelicula == listadoPeliculas[k].codigo && listadoElencos[i].idActor != -1)
+            {
+                if(corteControl == 0)
+                {
+                    printf("Elencos: \n");
+                    corteControl = 1;
+                }
+                for(j = 0; j < MAX_Actores; j++)
+                {
+                  if(listadoElencos[i].idActor == AuxListadoActores[j].codigo)
+                  {
+
+                        printf("Actor: %s %s ---- Valor del contrato: %f \n", AuxListadoActores[j].nombre,AuxListadoActores[j].apellido, listadoElencos[i].valorContrato);
+                        break;
+                  }
+                }
+            }
+        }
+        corteControl = 0;
+    }
+
 }
+
+
+
+
 void listarElenco(Elenco listadoElencos[], int MAX)
 {
 
